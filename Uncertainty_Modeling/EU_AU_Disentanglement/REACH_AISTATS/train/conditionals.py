@@ -113,17 +113,21 @@ def main(argv=None):
     parser.add_argument('--out', default='results/conditionals')
     parser.add_argument('--world', default='separated')
     parser.add_argument('--seeds', type=int, default=64)
+    parser.add_argument('--seed-start', type=int, default=0,
+                        help='first seed; give shards disjoint ranges so replications stay independent')
     parser.add_argument('--r', type=int, nargs='+', default=[32, 128, 512, 2048, 8192])
     parser.add_argument('--n', type=int, nargs='+', default=[1024, 8192, 65536])
     parser.add_argument('--shift', type=float, default=.5)
     parser.add_argument('--eta', type=float, default=0.)
     parser.add_argument('--m', type=int, default=256)
     args = parser.parse_args(argv)
-    if args.seeds < 2 or min(args.r+args.n) < 1 or not 0 < args.shift <= 1:
-        parser.error('At least two seeds, positive budgets, and a shift in (0,1] required')
+    if args.seeds < 2 or min(args.r+args.n) < 1 or not 0 < args.shift <= 1 or args.seed_start < 0:
+        parser.error('At least two seeds, a nonnegative seed start, positive budgets, '
+                     'and a shift in (0,1] required')
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     world = make_world(args.world)
-    frames = [condition_rows(world, condition, args.r, args.n, range(args.seeds),
+    seeds = range(args.seed_start, args.seed_start+args.seeds)
+    frames = [condition_rows(world, condition, args.r, args.n, seeds,
                              args.shift, m=args.m, eta=args.eta) for condition in CONDITIONS]
     df = pd.concat(frames, ignore_index=True)
     df.to_csv(out/'rows.csv', index=False)

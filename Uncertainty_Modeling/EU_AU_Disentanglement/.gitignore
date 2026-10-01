@@ -2,10 +2,12 @@
 # private working document, a generated artifact, or a cache, and is reproducible by
 # running the commands in REACH_AISTATS/README.md.
 
-# Working documents: plans, notes, drafts, status metadata. README.md is the only
-# tracked document — it is the single source of truth for a collaborator.
+# Working documents: private plans, notes, drafts, status metadata. Only the two
+# collaborator-facing documents are tracked; the internal AISTATS evidence plan and
+# PAPER_PLAN stay local.
 *.md
 !README.md
+!COLLABORATOR_PLAN.md
 VALIDATION.json
 
 # Generated experiment output. A single pilot run is ~1.2 MB of rows.csv/JSON/PNG and

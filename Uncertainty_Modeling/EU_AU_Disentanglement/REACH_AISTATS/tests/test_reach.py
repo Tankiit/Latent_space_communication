@@ -130,6 +130,18 @@ class TestFailureWorldsAndPlanning(unittest.TestCase):
         pair=select_pair(frame,band=.02,max_baseline=.92)
         self.assertEqual((pair['log_favoured_arm'],pair['label_favoured_arm']),(0,1))
         self.assertIsNone(select_pair(frame,band=1e-6,max_baseline=.92))
+    def test_seed_shards_are_disjoint_replications(self):
+        """Two shards must not recompute the same draws, or 'more seeds' buys nothing."""
+        world=make_world()
+        self.assertFalse(np.array_equal(draw_log(world,512,3),draw_log(world,512,4)))
+        # n=4096 is above the vacuous ceiling; at small n every width pins to 1 for
+        # structural reasons and would hide a shared-draw bug.
+        first=separation_rows([1.],[4096],range(0,2))
+        second=separation_rows([1.],[4096],range(2,4))
+        self.assertEqual(set(first.seed)&set(second.seed),set())
+        probe=lambda frame:frame[frame.region=='on_support'].W_cls.to_numpy()
+        self.assertLess(probe(first).max(),1.)
+        self.assertFalse(np.allclose(probe(first),probe(second)))
     def test_precision_planning_scales_with_target(self):
         frame=pd.DataFrame([dict(world_id='w',probe_id=0,region='on_support',seed=seed,n=n,m=4,
                                  eta=0.,W_cls=.1*n+(.05*seed if n==20 else 0.))

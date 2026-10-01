@@ -112,16 +112,21 @@ def main(argv=None):
     parser.add_argument('--world', default='separated')
     parser.add_argument('--selection-seeds', type=int, default=12)
     parser.add_argument('--eval-seeds', type=int, default=32)
+    parser.add_argument('--seed-start', type=int, default=0,
+                        help='first selection seed; shards must not overlap, and the selection and '
+                             'evaluation ranges stay disjoint within a shard')
     parser.add_argument('--max-baseline', type=float, default=MAX_BASELINE)
     parser.add_argument('--factor', type=int, default=4)
     parser.add_argument('--bootstrap', type=int, default=2000)
     args = parser.parse_args(argv)
-    if args.eval_seeds < 2 or args.selection_seeds < 2 or args.factor < 2:
-        parser.error('At least two seeds per stage and an upgrade factor of two required')
+    if args.eval_seeds < 2 or args.selection_seeds < 2 or args.factor < 2 or args.seed_start < 0:
+        parser.error('At least two seeds per stage, a nonnegative seed start, '
+                     'and an upgrade factor of two required')
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     world = make_world(args.world)
-    select_range = range(args.selection_seeds)
-    eval_range = range(args.selection_seeds, args.selection_seeds+args.eval_seeds)
+    first_eval = args.seed_start+args.selection_seeds
+    select_range = range(args.seed_start, first_eval)
+    eval_range = range(first_eval, first_eval+args.eval_seeds)
     selection = arm_frame(world, CANDIDATES, args.factor, select_range)
     evaluation = arm_frame(world, CANDIDATES, args.factor, eval_range)
     selection.to_csv(out/'selection_rows.csv', index=False)

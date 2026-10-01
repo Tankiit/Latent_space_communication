@@ -89,6 +89,8 @@ def main(argv=None):
     parser=argparse.ArgumentParser()
     parser.add_argument('--out',default='results/pilot')
     parser.add_argument('--seeds',type=int,default=8)
+    parser.add_argument('--seed-start',type=int,default=0,
+                        help='first seed; give shards disjoint ranges so replications stay independent')
     parser.add_argument('--n',type=int,nargs='+',default=[64,256,1024])
     parser.add_argument('--m',type=int,nargs='+',default=[32,128])
     parser.add_argument('--eta',type=float,nargs='+',default=[0,.2])
@@ -97,8 +99,9 @@ def main(argv=None):
     parser.add_argument('--precision-target',type=float,default=.01,
                         help='target bootstrap half-width for replication planning')
     args=parser.parse_args(argv)
-    if args.seeds<2 or min(args.n+args.m)<1 or args.bootstrap<1:
-        parser.error('At least two seeds and positive budgets/bootstrap required')
+    if args.seeds<2 or min(args.n+args.m)<1 or args.bootstrap<1 or args.seed_start<0:
+        parser.error('At least two seeds, a nonnegative seed start, and positive budgets/bootstrap required')
+    seeds=range(args.seed_start,args.seed_start+args.seeds)
     out=Path(args.out); out.mkdir(parents=True,exist_ok=True)
     manifest=dict(config=vars(args),protocol=P.PROTOCOL,
                   predictions_sha256=hashlib.sha256(Path(P.__file__).read_bytes()).hexdigest(),
@@ -112,8 +115,8 @@ def main(argv=None):
     frames=[]; baselines=[]
     for name in args.worlds:
         world=make_world(name)
-        frames.append(response_matrix(world,args.n,args.m,args.eta,range(args.seeds)))
-        for seed in range(args.seeds):
+        frames.append(response_matrix(world,args.n,args.m,args.eta,seeds))
+        for seed in seeds:
             log=draw_log(world,max(args.n),seed)
             for n in args.n:
                 # Do not offer an oracle novel conditional to the closed-set baseline silently.

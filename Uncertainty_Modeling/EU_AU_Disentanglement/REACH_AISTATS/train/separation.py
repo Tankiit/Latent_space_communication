@@ -81,14 +81,16 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', default='results/separation')
     parser.add_argument('--seeds', type=int, default=32)
+    parser.add_argument('--seed-start', type=int, default=0,
+                        help='first seed; give shards disjoint ranges so replications stay independent')
     parser.add_argument('--sep', type=float, nargs='+', default=[1., .5, .25, .1, .05])
     parser.add_argument('--n', type=int, nargs='+', default=[256, 1024, 4096, 16384])
     parser.add_argument('--target-width', type=float, default=.2)
     args = parser.parse_args(argv)
-    if args.seeds < 2 or min(args.n) < 1:
-        parser.error('At least two seeds and positive budgets required')
+    if args.seeds < 2 or min(args.n) < 1 or args.seed_start < 0:
+        parser.error('At least two seeds, a nonnegative seed start, and positive budgets required')
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
-    df = separation_rows(args.sep, args.n, range(args.seeds))
+    df = separation_rows(args.sep, args.n, range(args.seed_start, args.seed_start+args.seeds))
     df.to_csv(out/'rows.csv', index=False)
     summary = summarise(df, args.target_width)
     summary['config'] = vars(args)

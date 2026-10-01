@@ -47,9 +47,54 @@ python main.py train --out results/smoke --seeds 2 --n 16 32 --m 8 --eta 0 \
                      --worlds separated --bootstrap 2
 ```
 
+## Start here: the synthetic worlds
+
+**The synthetic path needs nothing from you — no data, no encoder, no cache.** It is where the
+ground truth is exact, so it is both the first thing to run and the only place a validity claim can
+be checked directly. Real data (item 6 below) comes much later.
+
+Every world has three sources — two known, one candidate novel — over four input cells. Known source
+weights split 0.65 / 0.35 of the non-novel mass, the novel source carries `delta` (0.1 by default),
+and the per-source clean target probabilities are `theta = (0.2, 0.8, 0.9)`.
+
+| World | Novel source `q` | What it probes |
+| --- | --- | --- |
+| `separated` | Mass concentrated in its own cell, outside the known convex hull | The favourable case: novel mass is identifiable, so `W_unk` should contract as the log grows |
+| `confounded` | The midpoint of the two known conditionals — *inside* the hull | A **designed failure**: logs cannot identify semantic novelty there, so `W_unk` must stay wide. Narrow intervals here would be a bug |
+| `absent` | Same as `separated` but with `delta = 0` | No novel mass exists; checks the machinery does not manufacture it |
+| `sep{gap}` family | Fixed, with symmetric known rows | Used by `main.py separation`; the tangent-space gap is exactly `0.4 * sep * sqrt(2)`, so separation is a dial rather than a side effect |
+
+Each row of `rows.csv` is one probe cell, and its `region` tells you how to read it:
+
+| Region | Meaning |
+| --- | --- |
+| `on_support` | Both known sources put mass here; the main estimation target |
+| `boundary` | Known-source overlap, where novelty contraction is observable |
+| `novel_region` | Only the novel source supports this cell — so in `confounded` and `absent`, where the novel source puts no mass here, it carries zero mass too |
+| `off_support` | No declared source supports it — zero mass, so the conditional is undefined and the vacuous `[0, 1]` policy fires |
+
+Contrast analysis averages over `on_support` and `boundary` probes within each independent seed.
+Inspect the region-specific rows before trusting that average, and expect `off_support` to be flat.
+
+The predictions those contrasts are scored against live in `train/predictions.py`: a signed
+expectation per (width, knob, world), where `n` is the unlabelled log size, `m` the label count, and
+`eta` the known symmetric flip rate. A `0` means invariance is predicted and is tested as
+equivalence; `None` means exploratory, with no claim either way. Read that file before running
+anything — it is the closest thing to a protocol this prototype has.
+
 ## What you need to do
 
-Items 1–3 block a submission. The rest is execution.
+**If you are the collaborator running experiments, go to [`COLLABORATOR_PLAN.md`](COLLABORATOR_PLAN.md)** —
+it has the five self-contained synthetic studies with exact commands, seed counts, pass criteria, and
+measured runtimes (none longer than three minutes). The list below is the full project view.
+
+Item 0 is a sanity check you can finish in a minute. Items 1–3 block a submission. The rest is
+execution.
+
+0. **Reproduce the synthetic suite and confirm the designed failures still fail.** `main.py test`
+   then `main.py train`; check that coverage holds per budget, that `W_unk` stays wide in
+   `confounded`, and that `off_support` reports the vacuous interval. If any of those "pass" too
+   cleanly, something is wrong with the code, not with the theory.
 
 1. **Supply the manuscript's posterior map and the exact `W_label` / `W_unk` definitions.** What is
    here is a declared anchor, not the paper's widths — the original formulas were never supplied.
@@ -112,9 +157,9 @@ Items 1–3 block a submission. The rest is execution.
   conservative and can stay wide. Wide intervals at a small embedding gap are the expected result,
   not a defect. Effect decisions use proposed margins, not a power calculation.
 
-## Real-data cache contract
+## Real-data cache contract (item 6, not needed for synthetic work)
 
-`evaluate` reads one NPZ with no pickled objects:
+Nothing above requires this. `evaluate` reads one NPZ with no pickled objects:
 
 | Key | Shape / purpose |
 | --- | --- |
