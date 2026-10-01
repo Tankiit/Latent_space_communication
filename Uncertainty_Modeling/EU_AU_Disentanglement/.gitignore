@@ -1,0 +1,44 @@
+# Keep this subtree lean: source code plus one README. Everything ignored below is a
+# private working document, a generated artifact, or a cache, and is reproducible by
+# running the commands in REACH_AISTATS/README.md.
+
+# Working documents: plans, notes, drafts, status metadata. README.md is the only
+# tracked document — it is the single source of truth for a collaborator.
+*.md
+!README.md
+VALIDATION.json
+
+# Generated experiment output. A single pilot run is ~1.2 MB of rows.csv/JSON/PNG and
+# every new run adds another directory, so results are rebuilt rather than committed.
+results/
+
+# Cached features, encoders, and any model state
+*.npz
+*.npy
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pkl
+*.pickle
+*.joblib
+cache/
+checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# Tooling and OS noise
+.DS_Store
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.idea/
+.vscode/
