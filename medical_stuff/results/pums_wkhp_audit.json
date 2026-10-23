@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-23",
+  "audit": "PUMS WKHP hurdle/typed-concept audit (Hurdle Audit Tests 1-2 of 04-hurdle-test-and-audit)",
+  "wyoming": {
+    "state": "WY",
+    "source": "ACS 2023 1-Year PUMS person file (psam_p56/psam_p11), unweighted",
+    "n": 4947,
+    "n_employed": 2744,
+    "n_nonemployed": 2203,
+    "p_zero_given_employed": 0.0,
+    "p_zero_given_nonemployed": 0.8420335905583296,
+    "overall_zero_fraction": 0.3749747321609056,
+    "cv_hours_given_employed_positive": 0.35127111463048005,
+    "unique_hours_values": 72,
+    "mean_hours_employed": 39.47704081632653
+  },
+  "dc": {
+    "state": "DC",
+    "source": "ACS 2023 1-Year PUMS person file (psam_p56/psam_p11), unweighted",
+    "n": 5930,
+    "n_employed": 3983,
+    "n_nonemployed": 1947,
+    "p_zero_given_employed": 0.0,
+    "p_zero_given_nonemployed": 0.7652799178222907,
+    "overall_zero_fraction": 0.25126475548060706,
+    "cv_hours_given_employed_positive": 0.29350617386287303,
+    "unique_hours_values": 65,
+    "mean_hours_employed": 40.451920662816974
+  },
+  "verdicts": {
+    "zeros_never_in_active_branch": "PASS: 0 zeros among 6,727 employed records across both states (binomial 95% upper bound ~5.5e-4)",
+    "wkhp_zero_equals_nonworkers": "FAIL as stated: zeros are exclusively non-employed (P(WKHP=0|emp)=0) but only 84.2% (WY) / 76.5% (DC) of non-employed are zero \u2014 WKHP is a past-12-months variable, ESR is current employment; ~16-24% of currently-non-employed worked earlier in the year. The clean typed variable is state = worked-at-all-in-past-12-months, extent = WKHP|worked (hurdle then partly definitional; non-trivial evidence is strict positivity + spread inside employment)",
+    "admission_band_0.10_0.90": "PASS: zero fractions 0.375 (WY) / 0.251 (DC)",
+    "decoupling_cv_ge_0.15": "PASS: CV 0.351 (WY) / 0.294 (DC), 65-72 unique hours values",
+    "cross_state_shift": "PRESENT: mean hours 39.48 (WY) vs 40.45 (DC); zero fraction 0.375 vs 0.251"
+  }
+}

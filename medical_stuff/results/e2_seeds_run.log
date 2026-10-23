@@ -1,0 +1,29 @@
+seed 0: zero_fill_pooled=3.184 indicator=3.860 pooled_masked=1.886 regression_impute=12.603 two_part=4.332 typed=1.921 | strongest_masked=pooled_masked
+seed 1: zero_fill_pooled=3.099 indicator=3.808 pooled_masked=1.700 regression_impute=6.515 two_part=4.153 typed=1.738 | strongest_masked=pooled_masked
+seed 2: zero_fill_pooled=3.072 indicator=3.723 pooled_masked=1.636 regression_impute=7.465 two_part=4.153 typed=1.803 | strongest_masked=pooled_masked
+seed 3: zero_fill_pooled=2.832 indicator=3.452 pooled_masked=1.614 regression_impute=8460.868 two_part=3.870 typed=1.600 | strongest_masked=pooled_masked
+seed 4: zero_fill_pooled=3.247 indicator=3.849 pooled_masked=1.795 regression_impute=12.713 two_part=4.237 typed=1.874 | strongest_masked=pooled_masked
+seed 5: zero_fill_pooled=3.042 indicator=3.736 pooled_masked=1.575 regression_impute=24.791 two_part=4.107 typed=1.761 | strongest_masked=pooled_masked
+seed 6: zero_fill_pooled=3.648 indicator=4.332 pooled_masked=2.044 regression_impute=19.916 two_part=4.668 typed=2.097 | strongest_masked=pooled_masked
+seed 7: zero_fill_pooled=2.754 indicator=3.482 pooled_masked=1.531 regression_impute=10.109 two_part=3.982 typed=1.637 | strongest_masked=pooled_masked
+seed 8: zero_fill_pooled=2.715 indicator=3.360 pooled_masked=1.369 regression_impute=22.529 two_part=3.883 typed=1.565 | strongest_masked=pooled_masked
+seed 9: zero_fill_pooled=3.427 indicator=4.096 pooled_masked=2.071 regression_impute=7.564 two_part=4.376 typed=2.103 | strongest_masked=pooled_masked
+
+=== E2 seeded summary (hidden-present RMSE, mean [95% CI] over 10 seeds) ===
+  zero_fill_pooled   3.102 [2.892, 3.313]  cov=1.00
+  indicator          3.770 [3.558, 3.982]  cov=1.00
+  pooled_masked      1.722 [1.560, 1.884]  cov=1.00
+  regression_impute  858.507 [-1052.225, 2769.240]  cov=1.00
+  two_part           4.176 [4.002, 4.350]  cov=1.00
+  typed              1.810 [1.674, 1.946]  cov=0.00
+  mean-magnitude baseline  1.807
+
+  decision vs pooled_masked: mean gap -0.088 CI95 [-0.140, -0.036] -> TIE (expected vs masked baselines)
+  attribution: {'total': 1.292, 'masking': 1.38, 'conditioning': 0.0, 'typing_proper': -0.088}
+  phantom on ABSENT rows (emit-positive / refusal):
+    zero_fill_pooled   1.00 / 0.00
+    indicator          0.63 / 0.00
+    pooled_masked      1.00 / 0.00
+    regression_impute  1.00 / 0.00
+    two_part           0.00 / 0.00
+    typed              0.00 / 1.00

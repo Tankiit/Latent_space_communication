@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-23",
+  "source": "ISIC Archive API v2, collection 406 (PAD-UFES-20), n_images=2298, n_patients=1373",
+  "caveats": [
+    "ISIC harmonization DROPS the 22 boolean clinical features (itch/hurts/grew/bleed/elevation/...) and collapses raw 'UNK' to nulls; the blank-vs-UNK ENCODING audit still requires the raw Mendeley CSV (doi 10.17632/zr7vgbcyr2.1, CC BY 4.0)",
+    "raw descriptor: Data in Brief doi:10.1016/j.dib.2020.106221 (Mendeley's 'related article' links the Computers in Biology and Medicine application paper)"
+  ],
+  "missing_per_field": {
+    "sex": 0.34986945169712796,
+    "fitzpatrick_skin_type": 0.34986945169712796,
+    "clin_size_long_diam_mm": 0.3516100957354221
+  },
+  "joint_missingness": {
+    "missing_all_three": 804,
+    "missing_any": 808,
+    "joint_fraction": 0.995049504950495
+  },
+  "diameter_extent": {
+    "n_present_numeric": 1490,
+    "unparseable": 0,
+    "zeros": 0,
+    "min": 1.0,
+    "max": 100.0,
+    "mean": 11.967919463087249,
+    "cv": 0.7212894792512318,
+    "unique": 41,
+    "verdict": "hurdle PASS on extent branch: 0 zeros among present, CV>=0.15, unique>=10 \u2014 'diameter present' and 'diameter value' factor cleanly"
+  },
+  "patient_level": {
+    "n_patients": 1373,
+    "affected_patients": 579,
+    "partial_within_patient": 0,
+    "note": "missingness clusters at the PATIENT level (declined to answer): 99.5% of lesions missing any of sex/fitzpatrick/diameter miss all; consistent with documented 'UNK' refusal codes operating jointly"
+  }
+}

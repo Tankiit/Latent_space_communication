@@ -1,0 +1,569 @@
+{
+  "config": {
+    "finding": "effusion",
+    "finding_idx": 2,
+    "rate": 0.3,
+    "n_seeds": 10,
+    "caps": [
+      8000,
+      3000
+    ],
+    "mechanism": "mcar"
+  },
+  "mean_rmse": {
+    "zero_fill_pooled": 3.1020981093407656,
+    "indicator": 3.769906033789083,
+    "pooled_masked": 1.7220606477525244,
+    "regression_impute": 858.5072624039612,
+    "two_part": 4.176159790735257,
+    "typed": 1.80984878451263
+  },
+  "rmse_ci95": {
+    "zero_fill_pooled": [
+      2.891548253412774,
+      3.312647965268757
+    ],
+    "indicator": [
+      3.557527389555967,
+      3.9822846780221988
+    ],
+    "pooled_masked": [
+      1.5603774784942093,
+      1.8837438170108396
+    ],
+    "regression_impute": [
+      -1052.225001478957,
+      2769.2395262868795
+    ],
+    "two_part": [
+      4.002052645778617,
+      4.350266935691897
+    ],
+    "typed": [
+      1.6738067115384845,
+      1.9458908574867757
+    ]
+  },
+  "mean_coverage": {
+    "zero_fill_pooled": 1.0,
+    "indicator": 1.0,
+    "pooled_masked": 1.0,
+    "regression_impute": 1.0,
+    "two_part": 1.0,
+    "typed": 0.004362199645218512
+  },
+  "mean_baseline_rmse": 1.8073475832454116,
+  "decision": {
+    "mean_gap": -0.08778813676010573,
+    "ci95": [
+      -0.1400693651630783,
+      -0.03550690835713315
+    ],
+    "verdict": "TIE (expected vs masked baselines)"
+  },
+  "attribution": {
+    "total": 1.2922493248281355,
+    "masking": 1.3800374615882411,
+    "conditioning": 0.0,
+    "typing_proper": -0.08778813676010566
+  },
+  "phantom_on_absent": {
+    "zero_fill_pooled": {
+      "emit_positive_rate": 0.9952344350499616,
+      "refusal_rate": 0.0
+    },
+    "indicator": {
+      "emit_positive_rate": 0.6342428900845504,
+      "refusal_rate": 0.0
+    },
+    "pooled_masked": {
+      "emit_positive_rate": 1.0,
+      "refusal_rate": 0.0
+    },
+    "regression_impute": {
+      "emit_positive_rate": 0.9953497309761721,
+      "refusal_rate": 0.0
+    },
+    "two_part": {
+      "emit_positive_rate": 0.0011145272867025366,
+      "refusal_rate": 0.0
+    },
+    "typed": {
+      "emit_positive_rate": 0.0011145272867025366,
+      "refusal_rate": 0.9988854727132974
+    }
+  },
+  "rule": "'typed wins' estimation iff paired RMSE gap vs the best masked arm (pooled_masked / regression_impute / two_part) is >= 0.1 magnitude units with a 95% t-interval across 10 generator-resampled seeds excluding 0; anything smaller is a tie",
+  "per_seed": [
+    {
+      "rmses": {
+        "zero_fill_pooled": 3.184065382337592,
+        "indicator": 3.8598774828020375,
+        "pooled_masked": 1.8862350446816942,
+        "regression_impute": 12.60339448647715,
+        "two_part": 4.331742841475449,
+        "typed": 1.9206856508297545
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.009433962264150941
+      },
+      "baseline_rmse": 1.9089388174758855,
+      "gap_vs_strongest_masked": -0.03445060614806028,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.994619523443505,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.6602613374327441,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9915449654112222,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.005764796310530361,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.005764796310530361,
+          "refusal_rate": 0.9942352036894696
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 3.099462150638045,
+        "indicator": 3.8079577718761293,
+        "pooled_masked": 1.6998127309755156,
+        "regression_impute": 6.515397384149134,
+        "two_part": 4.1529337060292795,
+        "typed": 1.738031655072907
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 1.738031655072907,
+      "gap_vs_strongest_masked": -0.03821892409739136,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.9850115295926211,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.6191391237509608,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.995772482705611,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0003843197540353574,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0003843197540353574,
+          "refusal_rate": 0.9996156802459646
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 3.072092353187704,
+        "indicator": 3.7232701032081663,
+        "pooled_masked": 1.635639406358241,
+        "regression_impute": 7.46497583536534,
+        "two_part": 4.1533075499170256,
+        "typed": 1.8031071955587974
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 1.8031071955587974,
+      "gap_vs_strongest_masked": -0.1674677892005565,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.9965411222136817,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.6053036126056879,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9950038431975403,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 1.0
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 2.8316570722991496,
+        "indicator": 3.452383193239935,
+        "pooled_masked": 1.6141739575413785,
+        "regression_impute": 8460.86762156989,
+        "two_part": 3.8696266198578537,
+        "typed": 1.6002919449887898
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 1.6002919449887898,
+      "gap_vs_strongest_masked": 0.013882012552588696,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.9930822444273636,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.6963873943120676,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9969254419677172,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 1.0
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 3.2467626149808684,
+        "indicator": 3.84919612703025,
+        "pooled_masked": 1.794716132773698,
+        "regression_impute": 12.712696684893118,
+        "two_part": 4.236716128469518,
+        "typed": 1.8738561784648418
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 1.8738561784648418,
+      "gap_vs_strongest_masked": -0.07914004569114375,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.9984627209838586,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.6448885472713297,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.994619523443505,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 1.0
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 3.0422946446566614,
+        "indicator": 3.7359214062481096,
+        "pooled_masked": 1.5754687862417984,
+        "regression_impute": 24.791181627423395,
+        "two_part": 4.107254910764366,
+        "typed": 1.7608940696270787
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 1.7608940696270787,
+      "gap_vs_strongest_masked": -0.1854252833852803,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.606456571867794,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9938508839354343,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0023059185242121443,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0023059185242121443,
+          "refusal_rate": 0.9976940814757879
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 3.648092811663486,
+        "indicator": 4.332264874577706,
+        "pooled_masked": 2.043584230507633,
+        "regression_impute": 19.915565262210663,
+        "two_part": 4.668084380219145,
+        "typed": 2.096565975422854
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 2.096565975422854,
+      "gap_vs_strongest_masked": -0.05298174491522101,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.602229054573405,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9950038431975403,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0003843197540353574,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0003843197540353574,
+          "refusal_rate": 0.9996156802459646
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 2.753946729746193,
+        "indicator": 3.482283539299798,
+        "pooled_masked": 1.5305251346195234,
+        "regression_impute": 10.10888767894845,
+        "two_part": 3.982217436266901,
+        "typed": 1.6368943540472094
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 1.6368943540472094,
+      "gap_vs_strongest_masked": -0.10636921942768596,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.9961568024596464,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.6129900076863951,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9980784012298232,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0003843197540353574,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0003843197540353574,
+          "refusal_rate": 0.9996156802459646
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 2.7154339738558115,
+        "indicator": 3.3599167402577703,
+        "pooled_masked": 1.3692093899032736,
+        "regression_impute": 22.52856993486423,
+        "two_part": 3.8832158964537067,
+        "typed": 1.5654266296984982
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.0
+      },
+      "baseline_rmse": 1.5654266296984982,
+      "gap_vs_strongest_masked": -0.19621723979522465,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.9996156802459646,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.7221368178324366,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9953881629515757,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.0,
+          "refusal_rate": 1.0
+        }
+      }
+    },
+    {
+      "rmses": {
+        "zero_fill_pooled": 3.4271733600421426,
+        "indicator": 4.095989099350921,
+        "pooled_masked": 2.071241663922486,
+        "regression_impute": 7.564333575390501,
+        "two_part": 4.376498437899323,
+        "typed": 2.102734191415568
+      },
+      "coverage": {
+        "zero_fill_pooled": 1.0,
+        "indicator": 1.0,
+        "pooled_masked": 1.0,
+        "regression_impute": 1.0,
+        "two_part": 1.0,
+        "typed": 0.03418803418803418
+      },
+      "baseline_rmse": 2.0894690120972523,
+      "gap_vs_strongest_masked": -0.03149252749308218,
+      "strongest_masked": "pooled_masked",
+      "phantom": {
+        "zero_fill_pooled": {
+          "emit_positive_rate": 0.9888547271329746,
+          "refusal_rate": 0.0
+        },
+        "indicator": {
+          "emit_positive_rate": 0.5726364335126826,
+          "refusal_rate": 0.0
+        },
+        "pooled_masked": {
+          "emit_positive_rate": 1.0,
+          "refusal_rate": 0.0
+        },
+        "regression_impute": {
+          "emit_positive_rate": 0.9973097617217525,
+          "refusal_rate": 0.0
+        },
+        "two_part": {
+          "emit_positive_rate": 0.001921598770176787,
+          "refusal_rate": 0.0
+        },
+        "typed": {
+          "emit_positive_rate": 0.001921598770176787,
+          "refusal_rate": 0.9980784012298232
+        }
+      }
+    }
+  ]
+}

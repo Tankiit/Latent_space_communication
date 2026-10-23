@@ -1,0 +1,4 @@
+Model,State Acc (%),Magnitude RMSE (Defined),Undefined Var (Leakage Risk),Delta_leak (Absence Invariance)
+TypedHead (Ours),76.6,1.5417,0.4253,0.0
+IndicatorBaseline,97.73,4.0912,0.0272,0.009847
+PooledBaseline,,3.9882,0.0961,

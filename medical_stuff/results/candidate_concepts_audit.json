@@ -1,0 +1,23 @@
+{
+  "chestmnist:mass": {
+    "independent_magnitude": true,
+    "two_extent_states": false,
+    "enough_rows": true,
+    "hurdle_usable": true,
+    "multi_state_kappa_usable": false
+  },
+  "retinamnist:grade": {
+    "independent_magnitude": false,
+    "two_extent_states": true,
+    "enough_rows": true,
+    "hurdle_usable": false,
+    "multi_state_kappa_usable": false
+  },
+  "chestmnist:source_bbox": {
+    "independent_magnitude": true,
+    "two_extent_states": false,
+    "enough_rows": true,
+    "hurdle_usable": true,
+    "multi_state_kappa_usable": false
+  }
+}
